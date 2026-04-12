@@ -1,17 +1,22 @@
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Dashboard from './pages/Dashboard'
+import Survey from './pages/Survey'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import './index.css'
 
 function App() {
-
-
   return (
-    <>
-      <section id="center">
-        <h1>LIGHTHOUSE LEADERS Survey System</h1>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <div className="appShell">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/survey" element={<Survey />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<Profile />} />
+      </Routes>
+    </div>
   )
 }
 
