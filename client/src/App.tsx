@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard'
 import Survey from './pages/Survey'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import Analytics from './pages/Analytics'
 import './index.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/survey" element={<Survey />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/analytics' element={<Analytics />} />
       </Routes>
     </div>
   )

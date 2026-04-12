@@ -3,86 +3,92 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 
 const Navbar = () => {
-  const navigate = useNavigate()
-  const [token, setToken] = useState(true)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const profileRef = useRef<HTMLDivElement | null>(null)
+    const navigate = useNavigate()
+    const [token, setToken] = useState(true)
+    const [menuOpen, setMenuOpen] = useState(false)
+    const profileRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        profileRef.current &&
-        !profileRef.current.contains(event.target as Node)
-      ) {
-        setMenuOpen(false)
-      }
-    }
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                profileRef.current &&
+                !profileRef.current.contains(event.target as Node)
+            ) {
+                setMenuOpen(false)
+            }
+        }
 
-    document.addEventListener('mousedown', handleClickOutside)
+        document.addEventListener('mousedown', handleClickOutside)
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
 
-  return (
-    <div className="navbar">
-      <img src={assets.logo} alt="Lighthouse Leaders logo" className="logo" />
-      <ul>
-        <li>
-          <NavLink to="/" end>
-            Dashboard
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/survey">
-            Survey
-          </NavLink>
-        </li>
-      </ul>
-      <div className="profile">
-        {token ? (
-          <div className="profile-trigger" ref={profileRef}>
-            <img className="profile-image" src={assets.profile} alt="Profile" />
-            <span className="profile-name">Sarah Johnson</span>
-            <button
-              type="button"
-              className={`dropdown-toggle${menuOpen ? ' is-open' : ''}`}
-              aria-label="Toggle profile menu"
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((open) => !open)}
-            >
-              <img className="dropdown-icon" src={assets.dropdown} alt="" aria-hidden="true" />
-            </button>
-            <div className={`profile-dropdown${menuOpen ? ' is-open' : ''}`}>
-              <div className="profile-dropdown-items">
-                <p
-                  onClick={() => {
-                    navigate('/profile')
-                    setMenuOpen(false)
-                  }}
-                >
-                  <img src={assets.profileIcon} alt="" aria-hidden="true" />
-                  <span>Profile</span>
-                </p>
-                <p
-                  onClick={() => {
-                    setToken(false)
-                    setMenuOpen(false)
-                  }}
-                >
-                  <img src={assets.logoutIcon} alt="" aria-hidden="true" />
-                  <span>Logout</span>
-                </p>
-              </div>
+    return (
+        <div className="navbar">
+            <img onClick={() => navigate('/')} src={assets.logo} alt="Lighthouse Leaders logo" className="logo" />
+            <ul>
+                <li>
+                    <NavLink to="/" end>
+                        Dashboard
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/survey">
+                        Survey
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/analytics">
+                        Analytics
+                    </NavLink>
+                </li>
+            </ul>
+            <div className="profile">
+                {token ? (
+                    <div className="profile-trigger" ref={profileRef}>
+                        <img className="profile-image" src={assets.profile} alt="Profile" />
+                        <span className="profile-name">Sarah Johnson</span>
+                        <button
+                            type="button"
+                            className={`dropdown-toggle${menuOpen ? ' is-open' : ''}`}
+                            aria-label="Toggle profile menu"
+                            aria-expanded={menuOpen}
+                            onClick={() => setMenuOpen((open) => !open)}
+                        >
+                            <img className="dropdown-icon" src={assets.dropdown} alt="" aria-hidden="true" />
+                        </button>
+                        <div className={`profile-dropdown${menuOpen ? ' is-open' : ''}`}>
+                            <div className="profile-dropdown-items">
+                                <p
+                                    onClick={() => {
+                                        navigate('/profile')
+                                        setMenuOpen(false)
+                                    }}
+                                >
+                                    <img src={assets.profileIcon} alt="" aria-hidden="true" />
+                                    <span>Profile</span>
+                                </p>
+                                <p
+                                    onClick={() => {
+                                        setToken(false)
+                                        setMenuOpen(false)
+                                        navigate('/login')
+                                    }}
+                                >
+                                    <img src={assets.logoutIcon} alt="" aria-hidden="true" />
+                                    <span>Logout</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <button onClick={() => navigate('/login')}>Login to Account</button>
+                )}
             </div>
-          </div>
-        ) : (
-          <button onClick={() => navigate('/login')}>Create Account</button>
-        )}
-      </div>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Navbar
