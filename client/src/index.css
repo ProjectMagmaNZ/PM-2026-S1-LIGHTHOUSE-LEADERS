@@ -39,7 +39,7 @@
   --dropdown-icon-size: 22px;
   --menu-icon-size: 20px;
   --dropdown-width: 240px;
-  --layout-width: 1160px;
+  --layout-width: 1500px;
 
   --radius-pill: 999px;
   --radius-card: 16px;
@@ -147,7 +147,7 @@ img {
   border-bottom: solid 2px var(--color-secondary);
 }
 
-/* Profile dropdown styling */
+/* Navbar Profile dropdown styling */
 .profile {
   margin-left: auto;
 }
@@ -262,6 +262,101 @@ img {
   cursor: pointer;
 }
 
+/* Dashboard styling */
+
+.dashboard-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(75vh);
+  padding: var(--space-4);
+  margin: var(--space-6) auto;
+}
+
+.dashboard-page {
+  width: 100%;
+  max-width: var(--layout-width);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.dashboard-header {
+  padding: var(--space-6) var(--space-6) var(--space-5);
+  border-bottom: 1px solid var(--color-border-card);
+}
+
+.dashboard-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text-strong);
+  margin: 0 0 var(--space-2);
+}
+
+.dashboard-header p {
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  padding: var(--space-6);
+  align-items: stretch;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--color-primary);
+  border: 1px solid var(--color-border-card);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color var(--transition-medium), transform var(--transition-fast);
+}
+
+.dashboard-card:hover {
+  background: var(--color-primary-hover);
+  border: 2px solid var(--color-secondary);
+  transform: translateY(-4px);
+}
+
+.dashboard-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.dashboard-card h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary-contrast);
+}
+
+.dashboard-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+}
+
 /* Survey page layout */
 .survey-page {
   display: grid;
@@ -334,7 +429,7 @@ img {
 
 .survey-title {
   margin: var(--space-2) 0 0;
-  font-size: 22px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--color-text-strong);
 }
