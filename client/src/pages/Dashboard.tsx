@@ -20,7 +20,7 @@ const Dashboard = () => {
                         <h1>New Survey</h1>
                         <p>You have a new survey to complete</p>
                     </div>
-                    <div onClick={() => navigate('/survey')} className="dashboard-card">
+                    <div onClick={() => navigate('/completed')} className="dashboard-card">
                         <img src={assets.completedIcon} alt="Completed Survey Icon" />
                         <h1>Completed Surveys</h1>
                         <p>View your last submitted survey.</p>
