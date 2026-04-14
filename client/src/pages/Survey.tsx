@@ -1,5 +1,9 @@
 import { useState } from 'react'
+import TextQuestion from '../components/TextQuestion'
+import RatingQuestion from '../components/RatingQuestion'
+import SurveyNav from '../components/SurveyNav'
 
+// In future iterations, we can fetch this from the backend and use it to dynamically generate the survey form
 const questions = [
     {
         id: 'q1',
@@ -47,15 +51,12 @@ const questions = [
     },
 ] as const
 
-const ratingScale = [1, 2, 3, 4, 5]
-
 const Survey = () => {
     const [activeQuestion, setActiveQuestion] = useState('q1')
     const [ratings, setRatings] = useState<Record<string, number>>({})
 
     const scrollToQuestion = (questionId: string) => {
         const section = document.getElementById(questionId)
-
         if (section) {
             setActiveQuestion(questionId)
             section.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -64,66 +65,40 @@ const Survey = () => {
 
     return (
         <main className="survey-page">
-            <aside className="survey-sidebar">
-                <div className="survey-sidebar-list">
-                    <p className="survey-sidebar-title">Survey Navigation:</p>
-                    {questions.map((question) => (
-                        <button
-                            key={question.id}
-                            type="button"
-                            className={`survey-sidebar-item${activeQuestion === question.id ? ' is-active' : ''}`}
-                            onClick={() => scrollToQuestion(question.id)}
-                        >
-                            {question.label}
-                        </button>
-                    ))}
-                </div>
-            </aside>
+            <SurveyNav
+                questions={questions}
+                activeQuestion={activeQuestion}
+                onSelect={scrollToQuestion}
+            />
 
             <section className="survey-content">
                 <h1 className="survey-title">SURVEY 1</h1>
 
-                {questions.map((question) => (
-                    <article
-                        key={question.id}
-                        id={question.id}
-                        className={`survey-card${question.type === 'rating' ? ' survey-card-rating' : ''}`}
-                    >
-                        <h2 className="survey-question">{question.title}</h2>
-
-                        {question.type === 'text' ? (
-                            <textarea
-                                className="survey-textarea"
-                                placeholder={question.placeholder}
-                                rows={4}
-                            />
-                        ) : (
-                            <div className="survey-rating-row">
-                                {ratingScale.map((value) => (
-                                    <button
-                                        key={value}
-                                        type="button"
-                                        className={`survey-rating-option${ratings[question.id] === value ? ' is-selected' : ''}`}
-                                        onClick={() =>
-                                            setRatings((currentRatings) => ({
-                                                ...currentRatings,
-                                                [question.id]: value,
-                                            }))
-                                        }
-                                    >
-                                        {value}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </article>
-                ))}
+                {questions.map((question) =>
+                    question.type === 'text' ? (
+                        <TextQuestion
+                            key={question.id}
+                            id={question.id}
+                            title={question.title}
+                            placeholder={question.placeholder}
+                        />
+                    ) : (
+                        <RatingQuestion
+                            key={question.id}
+                            id={question.id}
+                            title={question.title}
+                            rating={ratings[question.id]}
+                            onRate={(value) =>
+                                setRatings((current) => ({ ...current, [question.id]: value }))
+                            }
+                        />
+                    )
+                )}
 
                 <div className="survey-submit-row">
                     <button type="button" className="survey-submit-button">
                         Submit Survey
                     </button>
-
                     <button type="button" className="survey-clear-button">
                         Clear Survey
                     </button>
