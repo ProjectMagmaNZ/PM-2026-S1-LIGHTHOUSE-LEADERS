@@ -30,7 +30,7 @@ const Navbar = () => {
             <img onClick={() => navigate('/')} src={assets.logo} alt="Lighthouse Leaders logo" className="logo" />
             <ul>
                 <li>
-                    <NavLink to="/" end>
+                    <NavLink to="/dashboard" end>
                         Dashboard
                     </NavLink>
                 </li>

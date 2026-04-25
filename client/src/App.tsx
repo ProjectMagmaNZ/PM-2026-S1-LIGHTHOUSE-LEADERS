@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard'
 import Survey from './pages/Survey'
@@ -9,12 +9,16 @@ import Completed from './pages/Completed'
 import './index.css'
 
 function App() {
+  const location = useLocation()
+  const hideNavbar = location.pathname === '/login'
+
   return (
     <div className="appShell">
-      <Navbar />
+      {!hideNavbar && <Navbar />}
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/survey" element={<Survey />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/analytics' element={<Analytics />} />
