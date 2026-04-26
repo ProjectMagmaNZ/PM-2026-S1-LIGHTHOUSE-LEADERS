@@ -15,7 +15,7 @@
   --color-primary: #7f49b2;
   --color-primary-hover: #6f3fa6;
   --color-primary-contrast: #ffffff;
-  --color-secondary: #fdea76;
+  --color-secondary: #F4C542;
   --color-border-soft: #ece7df;
   --color-border-card: #e5e7eb;
   --color-panel-muted: #f5f6f8;
@@ -701,106 +701,143 @@ img {
 
 /* Survey page layout */
 .survey-page {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: calc(100vh - var(--navbar-height));
+  background: var(--color-panel-muted);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-5);
-  max-width: var(--layout-width);
-  margin: 0 auto;
-  padding: var(--space-5);
-  align-items: start;
 }
 
-.survey-sidebar {
-  position: sticky;
-  top: calc(var(--navbar-height) + 7%);
-  align-self: start;
+/* Progress bar */
+.survey-progress {
+  width: 100%;
+  max-width: 760px;
 }
 
-.survey-sidebar-title {
-  margin: 0 0 var(--space-2);
-  font-size: 16px;
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-strong);
+.survey-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+  font-size: 13px;
+  color: var(--color-text-muted);
 }
 
-/* Survey sidebar styling */
-.survey-sidebar-list {
-  padding: var(--space-4);
+.survey-progress-track {
+  width: 100%;
+  height: 8px;
+  background: var(--color-border-card);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.survey-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+  transition: width 300ms ease;
+}
+
+/* Card */
+.survey-card {
+  width: 100%;
+  max-width: 760px;
+  padding: var(--space-7);
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border-card);
-  border-radius: var(--radius-soft);
+  border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-}
-
-.survey-sidebar-item {
-  width: 100%;
-  min-height: var(--nav-control-height);
-  padding: 0 var(--space-3);
-  border: 1px solid var(--color-primary);
-  border-radius: 4px;
-  background: var(--color-bg-surface);
-  color: var(--color-primary);
-  font-size: 12px;
-  font-weight: var(--font-weight-medium);
-  line-height: 1;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast),
-    border-color var(--transition-fast);
-}
-
-.survey-sidebar-item+.survey-sidebar-item {
-  margin-top: 6px;
-}
-
-.survey-sidebar-item.is-active,
-.survey-sidebar-item:hover {
-  background: var(--color-primary);
-  color: var(--color-primary-contrast);
-  border-color: var(--color-secondary);
-}
-
-/* Survey content styling */
-.survey-content {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
 
-.survey-title {
-  margin: var(--space-2) 0 0;
-  font-size: 32px;
-  font-weight: 700;
+/* Badge */
+.survey-badge {
+  display: inline-block;
+  padding: 6px var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-secondary);
   color: var(--color-text-strong);
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
 }
 
-.survey-card {
-  padding: var(--space-4);
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border-card);
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-card);
-}
-
+/* Question text */
 .survey-question {
-  margin: 0 0 var(--space-3);
-  font-size: 15px;
+  margin: 0;
+  font-size: 26px;
   font-weight: 700;
   color: var(--color-text-strong);
+  line-height: 1.3;
 }
 
+.survey-question-subtitle {
+  margin: 0;
+  font-size: var(--font-size-body);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Rating */
+.survey-rating-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.survey-rating-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-3);
+}
+
+.survey-rating-option {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-border-card);
+  border-radius: var(--radius-soft);
+  background: var(--color-bg-surface);
+  color: var(--color-text-strong);
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.survey-rating-option:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.survey-rating-option.is-selected {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+  transform: translateY(-2px);
+}
+
+/* Textarea */
 .survey-textarea {
   width: 100%;
-  min-height: 86px;
-  padding: 12px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background: var(--color-panel-muted);
+  min-height: 160px;
+  padding: var(--space-3);
+  border: 1.5px solid var(--color-border-card);
+  border-radius: var(--radius-soft);
+  background: var(--color-bg-surface);
   color: var(--color-text-strong);
   font: inherit;
+  font-size: var(--font-size-body);
   resize: vertical;
+  transition: border-color var(--transition-fast);
 }
 
 .survey-textarea::placeholder {
@@ -809,95 +846,162 @@ img {
 
 .survey-textarea:focus {
   outline: none;
-  border-color: rgba(127, 73, 178, 0.35);
+  border-color: var(--color-primary);
 }
 
-/* Survey rating styling */
-.survey-card-rating {
-  min-height: 136px;
+.survey-char-count {
+  text-align: right;
+  font-size: 12px;
+  color: var(--color-text-muted);
 }
 
-.survey-rating-row {
+/* Navigation row */
+.survey-nav-row {
   display: flex;
-  justify-content: center;
-  gap: var(--space-5);
-  margin: 24px 0 34px;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-card);
+  margin-top: var(--space-2);
 }
 
-.survey-rating-option {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: none;
+.survey-nav-prev {
+  min-height: var(--nav-control-height);
+  padding: 0 var(--space-5);
+  border: 1.5px solid var(--color-border-card);
   border-radius: var(--radius-pill);
-  background: transparent;
+  background: var(--color-bg-surface);
   color: var(--color-text-strong);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1;
+  font: inherit;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition:
     background-color var(--transition-fast),
-    color var(--transition-fast),
-    transform var(--transition-fast);
+    border-color var(--transition-fast);
 }
 
-.survey-rating-option:hover {
-  background: #efe6f8;
+.survey-nav-prev:hover:not(:disabled) {
+  border-color: var(--color-primary);
   color: var(--color-primary);
 }
 
-.survey-rating-option.is-selected {
+.survey-nav-prev:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.survey-nav-next {
+  min-height: var(--nav-control-height);
+  padding: 0 var(--space-5);
+  border: none;
+  border-radius: var(--radius-pill);
   background: var(--color-primary);
   color: var(--color-primary-contrast);
-  transform: translateY(-1px);
-}
-
-/* Survey action styling */
-
-.survey-submit-row {
-  display: flex;
-  justify-content: space-between;
-}
-
-
-.survey-submit-row button {
-  min-width: 25%;
-  min-height: 100%;
-  padding: 12px 14px;
-  border-radius: 4px;
-  font-size: 14px;
+  font: inherit;
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.survey-nav-next:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.survey-nav-next:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* PhotoVoice */
+.survey-label {
+  display: block;
+  font-size: 18px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-strong);
+}
+
+.survey-photovoice-desc {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.survey-photo-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 200px;
+  border: 2px dashed var(--color-border-card);
+  border-radius: var(--radius-soft);
+  background: var(--color-panel-muted);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-body);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.survey-photo-dropzone:hover {
+  border-color: var(--color-primary);
+  background: var(--color-bg-surface-hover);
+}
+
+.survey-photo-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-placeholder);
+}
+
+.survey-photo-hint {
+  font-size: 12px;
+  color: var(--color-placeholder);
+  margin: 0;
+}
+
+.survey-photo-input {
+  display: none;
+}
+
+.survey-photo-preview {
+  position: relative;
+  border-radius: var(--radius-soft);
+  overflow: hidden;
+}
+
+.survey-photo-preview img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.survey-photo-change {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-dropdown);
   cursor: pointer;
 }
 
-.survey-submit-button {
-  border: none;
-  background: var(--color-primary);
-  color: var(--color-primary-contrast);
-}
-
-.survey-submit-button:hover {
-  background: var(--color-primary-hover);
-  border: solid 1px var(--color-secondary);
-  transition-duration: 0.4s;
-}
-
-
-.survey-clear-button {
-  border: solid 1px var(--color-primary);
-  background: var(--color-primary-contrast);
-  color: var(--color-primary);
-}
-
-.survey-clear-button:hover {
-  background: var(--color-primary-hover);
-  border: solid 1px var(--color-secondary);
-  color: var(--color-primary-contrast);
-  transition-duration: 0.4s;
+.survey-photo-change-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-strong);
 }
 
 /* Profile Styling */
