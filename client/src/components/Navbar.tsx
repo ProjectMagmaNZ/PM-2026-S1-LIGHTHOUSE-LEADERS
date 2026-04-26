@@ -31,12 +31,12 @@ const Navbar = () => {
             <ul>
                 <li>
                     <NavLink to="/dashboard" end>
-                        Dashboard
+                        Surveys
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/survey">
-                        Survey
+                    <NavLink to="/create-survey">
+                        Create Survey
                     </NavLink>
                 </li>
                 <li>

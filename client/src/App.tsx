@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Analytics from './pages/Analytics'
 import Completed from './pages/Completed'
+import CreateSurvey from './pages/CreateSurvey'
 import './index.css'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/survey" element={<Survey />} />
+        <Route path="/create-survey" element={<CreateSurvey />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />

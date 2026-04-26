@@ -4,6 +4,7 @@ import { assets } from '../assets/assets'
 
 
 export default function Login() {
+    // Note that there is no authentication or storage of user data, just the skin
     const [isSignup, setIsSignup] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
