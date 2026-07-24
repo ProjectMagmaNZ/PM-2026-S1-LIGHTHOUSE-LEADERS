@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { listAvailableSurveys, type SurveyListItemWithStatus } from "../services/surveys";
 
-export function useSurveys() {
+export const useSurveys = (): { surveys: SurveyListItemWithStatus[]; loading: boolean; error: string | null } => {
   const [surveys, setSurveys] = useState<SurveyListItemWithStatus[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -14,7 +14,9 @@ export function useSurveys() {
         setLoading(true);
         setError(null);
         const data = await listAvailableSurveys();
-        if (mounted) setSurveys(data);
+        // Normalize to an array
+        const list = Array.isArray(data) ? data : (data as any)?.surveys ?? [];
+        if (mounted) setSurveys(list as SurveyListItemWithStatus[]);
       } catch (err: any) {
         if (mounted) setError(err?.response?.data?.detail ?? "Failed to load surveys");
       } finally {

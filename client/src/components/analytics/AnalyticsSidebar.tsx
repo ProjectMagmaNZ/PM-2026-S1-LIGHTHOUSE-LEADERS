@@ -94,7 +94,7 @@ const AnalyticsSidebar = ({
             )}
 
             {/* Reflections */}
-            {latestSurvey.textResponses && Object.keys(latestSurvey.textResponses).length > 0 && (
+            {/* {latestSurvey.textResponses && Object.keys(latestSurvey.textResponses).length > 0 && (
                 <div className="analytics-card">
                     <h2 className="analytics-card-title">{isAdmin ? 'Latest Reflections' : 'Your Reflections'}</h2>
                     <div className="analytics-reflections">
@@ -118,7 +118,7 @@ const AnalyticsSidebar = ({
                         )}
                     </div>
                 </div>
-            )}
+            )} */}
         </aside>
     )
 }
